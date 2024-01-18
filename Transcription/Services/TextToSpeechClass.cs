@@ -8,5 +8,6 @@ namespace Transcription.Services
 {
     internal class TextToSpeechClass
     {
+
     }
 }

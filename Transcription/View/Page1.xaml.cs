@@ -43,6 +43,20 @@ namespace Transcription.View
             MP3 mp3Page = new MP3();
             Windows_container.Children.Add(mp3Page);
         }
+        private void BTN_Deconnection_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            Window.GetWindow(this).Close();
+            mainWindow.Show();
+        }
 
+        private void BTN_Creation_login_Click(object sender, RoutedEventArgs e)
+        {
+            Windows_container.RowDefinitions.Clear();
+            Windows_container.Children.Clear();
+            Button button = sender as Button;
+            Login login = new Login();
+            Windows_container.Children.Add(login);
+        }
     }
 }

@@ -14,15 +14,17 @@ namespace Transcription.Services
     {
         private WaveInEvent waveIn;
         private WaveFileWriter writer;
-
         private string outputDirectory;
+        private MP3ToText mp3ToTextConverter;
 
         public SpeechToMP3()
         {
             outputDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "enregistrements");
+            mp3ToTextConverter = new MP3ToText();
         }
 
-        public string LastRecordedFilePath { get; private set; } //pour stocker le chemin d'enregistrement
+        public string LastRecordedFilePath { get; private set; }
+        public Action<string> UpdateTextBoxAction { get; set; }
 
         public List<string> GetAudioDevices()
         {
@@ -35,19 +37,14 @@ namespace Transcription.Services
             return deviceList;
         }
 
-
         public void StartRecording(int deviceNumber)
         {
             try
             {
-                // Créez le dossier d'enregistrement s'il n'existe pas
                 Directory.CreateDirectory(outputDirectory);
-
-                // Générez un chemin de fichier unique
                 string outputFilePath = GenerateUniqueFilePath();
                 LastRecordedFilePath = outputFilePath;
 
-                // Initialisez waveIn avant de créer le writer
                 waveIn = new WaveInEvent
                 {
                     DeviceNumber = deviceNumber,
@@ -56,16 +53,12 @@ namespace Transcription.Services
                 waveIn.DataAvailable += OnDataAvailable;
                 waveIn.RecordingStopped += OnRecordingStopped;
 
-                // Maintenant, créez le WaveFileWriter
                 writer = new WaveFileWriter(outputFilePath, waveIn.WaveFormat);
-
-                // Commencez l'enregistrement
                 waveIn.StartRecording();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erreur lors de l'enregistrement : {ex.Message}");
-                // Gérez l'exception ici (par exemple, nettoyez les ressources si nécessaire)
             }
         }
 
@@ -101,11 +94,34 @@ namespace Transcription.Services
 
         private void OnRecordingStopped(object sender, StoppedEventArgs args)
         {
-            DisposeRecordingResources();
+            // Attendez un peu pour que les données finissent d'être écrites sur le disque
+            Task.Delay(500).ContinueWith(_ =>
+            {
+                DisposeRecordingResources();
+                ConvertRecordedAudioToText();
+            });
+        }
+
+        private async void ConvertRecordedAudioToText()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(LastRecordedFilePath))
+                {
+                    string textResult = await mp3ToTextConverter.ConvertAudioToText(LastRecordedFilePath);
+                    UpdateTextBoxAction?.Invoke(textResult);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la conversion audio en texte : {ex.Message}");
+                UpdateTextBoxAction?.Invoke($"Erreur lors de la conversion audio en texte : {ex.Message}");
+            }
         }
 
         private void DisposeRecordingResources()
         {
+            writer?.Close();
             writer?.Dispose();
             writer = null;
             waveIn?.Dispose();

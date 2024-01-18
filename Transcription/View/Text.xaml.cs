@@ -1,20 +1,26 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using Transcription.Services; // Ensure this is the correct namespace
+using Transcription.Services; 
 
 namespace Transcription.View
 {
     public partial class Text : UserControl
     {
+        //declaration des variables
         private AWSPolly _awsPolly;
         private AWSComprehend _awsComprehend;
+        private PDFGenerator _pdfGenerator; 
 
         public Text()
         {
             InitializeComponent();
+
+            //instance de classe
             _awsPolly = new AWSPolly();
             _awsComprehend = new AWSComprehend();
+            _pdfGenerator = new PDFGenerator();
+
             BTN_Retour.Click += BTN_Retour_Click;
         }
 
@@ -43,7 +49,15 @@ namespace Transcription.View
 
         private void BTN_PDF_Click(object sender, RoutedEventArgs e)
         {
+            GeneratePdf();
+        }
+        private void GeneratePdf()
+        {
+            string outFile = Environment.CurrentDirectory + "/resume.pdf";
 
+            
+            _pdfGenerator.GeneratePdf(TB_Exit.Text, outFile);
+            _pdfGenerator.OpenPdf(outFile);
         }
     }
 }
