@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Transcription.Services
 {
-    internal class SpeechToTextClasse
+    internal class MP3ToText
     {
+
+
     }
 }

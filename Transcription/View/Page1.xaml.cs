@@ -30,27 +30,18 @@ namespace Transcription.View
 
         private void BTN_Texte_Click(object sender, RoutedEventArgs e)
         {
-            // Clear the Grid
-            Window_container.Children.Clear();
-
-            // Create a new instance of Text.xaml
-            View.Text textPage = new View.Text();
-
-            // Add Text.xaml to the center of the Grid
-            Grid.SetRow(textPage, 1);
-            Window_container.Children.Add(textPage);
+            Windows_container.RowDefinitions.Clear();
+            Windows_container.Children.Clear();
+            Text textPage = new Text(); 
+            Windows_container.Children.Add(textPage);
         }
         private void BTN_MP3_Click(object sender, RoutedEventArgs e)
         {
-            // Clear the Grid
-            Window_container.Children.Clear();
-
-            // Create a new instance of MP3.xaml
+            Windows_container.RowDefinitions.Clear();
+            Windows_container.Children.Clear();
+            Button button = sender as Button;
             MP3 mp3Page = new MP3();
-
-            // Add MP3.xaml to the center of the Grid
-            Grid.SetRow(mp3Page, 1);
-            Window_container.Children.Add(mp3Page);
+            Windows_container.Children.Add(mp3Page);
         }
 
     }

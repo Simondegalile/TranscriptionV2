@@ -160,7 +160,8 @@
     </ApplicationDefinition>
     <Compile Include="Services\AWSComprehend.cs" />
     <Compile Include="Services\AWSPolly.cs" />
-    <Compile Include="Services\SpeechToTextClasse.cs" />
+    <Compile Include="Services\MP3ToText.cs" />
+    <Compile Include="Services\SpeechToMP3.cs" />
     <Compile Include="Services\TextToSpeechClass.cs" />
     <Compile Include="View\MP3.xaml.cs">
       <DependentUpon>MP3.xaml</DependentUpon>

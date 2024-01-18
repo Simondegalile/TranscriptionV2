@@ -35,14 +35,9 @@ namespace Transcription
         }
         private void BP_Login_Click(object sender, RoutedEventArgs e)
         {
-            // Clear the Grid
+            Window_container.RowDefinitions.Clear();
             Window_container.Children.Clear();
-
-            // Create a new instance of Page1.xaml
-            View.Page1 page1 = new View.Page1();
-
-            // Add Page1.xaml to the center of the Grid
-            Grid.SetRow(page1, 1);
+            View.Page1 page1 = new Page1();
             Window_container.Children.Add(page1);
         }
 

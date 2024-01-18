@@ -35,16 +35,15 @@ namespace Transcription.View
         }
         private void BTN_Retour_Click(object sender, RoutedEventArgs e)
         {
-            var mainWindow = (MainWindow)Application.Current.MainWindow;
-            var contentGrid = mainWindow.FindName("Window_container") as Grid;
+            Window_container.RowDefinitions.Clear();
+            Window_container.Children.Clear();
+            View.Page1 page1 = new Page1();
+            Window_container.Children.Add(page1);
+        }
 
-            if (contentGrid != null)
-            {
-                contentGrid.Children.Clear();
-                var page1 = new Page1();
-                Grid.SetRow(page1, 1); // Assurez-vous de définir la bonne ligne si nécessaire
-                contentGrid.Children.Add(page1);
-            }
+        private void BTN_PDF_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

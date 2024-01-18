@@ -15,21 +15,19 @@
         Title="MainWindow" Height="500" Width="800"
         Background="#0077b6">
 
-    <Grid Name="Window_container">
+    <Grid Background="#0077b6" Name="Window_container">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"></RowDefinition>
-            <RowDefinition Height="10*"></RowDefinition>
-            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
-
-        <!-- En tête de page -->
+        <!-- En tête de page-->
         <Grid Name="En_tête" Grid.Row="0">
-            <!-- Content of header -->
+
         </Grid>
 
-        <!-- Corps du page -->
-        <Grid Grid.Row="1">
+        <!-- Corps du page-->
+        <Grid Grid.Row="1" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -40,53 +38,66 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="0.5*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <!-- Login -->
                 <Grid Grid.Row="0" Name="Login">
-                    <Label Content="Login" FontSize="40" FontFamily="Times New Roman Bold Italic"
-                           VerticalAlignment="center" HorizontalAlignment="Center" Foreground="#0077b6"/>
+                    <Label Content="Login" FontSize="40" FontFamily="Times New Roman Bold Italic" VerticalAlignment="center" HorizontalAlignment="Center" Foreground="#0077b6"></Label>
                 </Grid>
-
-                <!-- Cadre user name -->
+                <!--cadre user name-->
                 <Grid Grid.Row="1" Name="Username">
+
                     <TextBox x:Name="TB_Login"
-                             materialDesign:HintAssist.Hint="Sign in"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             FontSize="25" Width="400" TextChanged="TB_Login_TextChanged"/>
+                        materialDesign:HintAssist.Hint="Sign in"
+                        materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+                        materialDesign:HintAssist.FloatingScale="0.50"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        FontSize="25" Width="400" TextChanged="TB_Login_TextChanged"/>
+
                 </Grid>
 
-                <!-- Cadre password -->
+                <!--cadre password-->
                 <Grid Grid.Row="2" Name="Password">
+
                     <StackPanel>
                         <PasswordBox x:Name="Pwd_Password"
-                                     Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}"
-                                     materialDesign:HintAssist.Hint="Password"
-                                     FontSize="25" Width="400" HorizontalAlignment="Center"/>
+                            Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}"
+                            IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
+                            materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
+                            materialDesign:HintAssist.Hint="Password" 
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            materialDesign:HintAssist.HelperText="If you have forgotten your password make a request on +33 7 89 24 05 77" 
+                            FontSize="25" Width="400" HorizontalAlignment="Center"/>
+
                     </StackPanel>
+
                 </Grid>
 
-                <!-- Checkbox -->
+                <!--chec box-->
                 <Grid Grid.Row="3">
-                    <CheckBox Content="Remember Me" FontSize="19" HorizontalAlignment="Center"/>
+                    <CheckBox Content="Remember Me"  FontSize="19" HorizontalAlignment="Center"></CheckBox>
                 </Grid>
 
-                <!-- Bouton login -->
+                <!--bouton login-->
                 <Grid Grid.Row="4">
-                    <Button Name="BP_Login"
-                            Style="{StaticResource MaterialDesignPaperSecondaryLightButton}"
-                            Width="200" Background="#0077b6"
-                            Content="Sign In" FontFamily="Times New Roman Bold Italic"
-                            Click="BP_Login_Click"/>
+                    <Button
+                          Name="BP_Login"
+                          Style="{StaticResource MaterialDesignPaperSecondaryLightButton}"
+                          Width="200" Background="#0077b6"
+                          ToolTip="Resource name: MaterialDesignPaperSecondaryLightButton"
+                          Content="Sign In" FontFamily="Times New Roman Bold Italic"
+                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="BP_Login_Click" />
                 </Grid>
+
             </Grid>
+
         </Grid>
 
-        <!-- Pieds de page -->
+        <!-- Pieds de page-->
         <Grid Grid.Row="2">
-            <!-- Footer content -->
+
         </Grid>
     </Grid>
 </Window>
