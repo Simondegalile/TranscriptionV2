@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +15,7 @@ namespace Transcription.Services
 
         public MP3ToText()
         {
+            //Initisalise du client
             client = new HttpClient();
         }
 
@@ -23,6 +23,7 @@ namespace Transcription.Services
         {
             string url = $"https://speech.googleapis.com/v1/speech:recognize?key={apiKey}";
 
+            // Création du corps de la requête avec les détails de l'audio
             var requestBody = new
             {
                 config = new
@@ -39,6 +40,7 @@ namespace Transcription.Services
 
             string json = JsonConvert.SerializeObject(requestBody);
 
+            // Préparation et envoi de la requête HTTP
             HttpRequestMessage request = new HttpRequestMessage
             {
                 Method = HttpMethod.Post,
@@ -57,6 +59,7 @@ namespace Transcription.Services
         {
             var transcriptionResponse = JsonConvert.DeserializeObject<TranscriptionResponse>(jsonResponse);
 
+            // Vérification et retour du premier transcript trouvé
             if (transcriptionResponse?.Results != null && transcriptionResponse.Results.Count > 0)
             {
                 var firstResult = transcriptionResponse.Results[0];
@@ -70,6 +73,8 @@ namespace Transcription.Services
         }
     }
 
+
+    // Classes pour la désérialisation de la réponse JSON de l'API Google Speech-to-Text
     public class TranscriptionResponse
     {
         [JsonProperty("results")]

@@ -59,6 +59,15 @@
         </Grid>
         <Grid Grid.Row="2">
             <TextBox Name="TB_texte"  HorizontalAlignment="Center" Height="202" TextWrapping="Wrap" Text="Text" VerticalAlignment="Center" Width="513" Background="White"/>
+            <Button Name="BTN_Translate" Width="100" Height="22" Click="BTN_Translate_Click" HorizontalAlignment="Left"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            materialDesign:ButtonProgressAssist.Value="-1"
+                            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                            Content="Traduire" FontSize="14" Foreground="white"
+                            Margin="10,49,0,205" Background="#219ebc"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+
         </Grid>
     </Grid>
 </UserControl>

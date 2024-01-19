@@ -10,7 +10,8 @@ namespace Transcription.View
         //declaration des variables
         private AWSPolly _awsPolly;
         private AWSComprehend _awsComprehend;
-        private PDFGenerator _pdfGenerator; 
+        private PDFGenerator _pdfGenerator;
+
 
         public Text()
         {
@@ -20,6 +21,7 @@ namespace Transcription.View
             _awsPolly = new AWSPolly();
             _awsComprehend = new AWSComprehend();
             _pdfGenerator = new PDFGenerator();
+
 
             BTN_Retour.Click += BTN_Retour_Click;
         }
@@ -59,5 +61,7 @@ namespace Transcription.View
             _pdfGenerator.GeneratePdf(TB_Exit.Text, outFile);
             _pdfGenerator.OpenPdf(outFile);
         }
+
+
     }
 }

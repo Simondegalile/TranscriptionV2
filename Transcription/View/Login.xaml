@@ -50,7 +50,7 @@
                         materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
                         materialDesign:HintAssist.FloatingScale="0.50"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        FontSize="25" Width="400" TextChanged="TB_Mail"/>
+                        FontSize="15" Width="400" TextChanged="TB_Mail"/>
                 </Grid>
                 <!--cadre user name-->
                 <Grid Grid.Row="1" Name="Username">
@@ -60,7 +60,7 @@
                         materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
                         materialDesign:HintAssist.FloatingScale="0.50"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        FontSize="25" Width="400" TextChanged="TB_Login_TextChanged"/>
+                        FontSize="15" Width="400" TextChanged="TB_Login_TextChanged" />
 
                 </Grid>
 
@@ -74,8 +74,8 @@
                             materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
                             materialDesign:HintAssist.Hint="Password" 
                             materialDesign:TextFieldAssist.HasClearButton="True"
-                            materialDesign:HintAssist.HelperText="Votre mot de passe doit contenir au moins 4 caractères." 
-                            FontSize="25" Width="400" HorizontalAlignment="Center"/>
+                             
+                            FontSize="15" Width="400" HorizontalAlignment="Center"/>
 
                     </StackPanel>
 

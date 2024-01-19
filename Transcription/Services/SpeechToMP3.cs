@@ -12,6 +12,8 @@ namespace Transcription.Services
 {
     internal class SpeechToMP3
     {
+
+        // Initialisation des composants pour l'enregistrement audio
         private WaveInEvent waveIn;
         private WaveFileWriter writer;
         private string outputDirectory;
@@ -19,6 +21,7 @@ namespace Transcription.Services
 
         public SpeechToMP3()
         {
+            // Définition du répertoire de sortie et initialisation du convertisseur MP3 en texte
             outputDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "enregistrements");
             mp3ToTextConverter = new MP3ToText();
         }
@@ -26,6 +29,8 @@ namespace Transcription.Services
         public string LastRecordedFilePath { get; private set; }
         public Action<string> UpdateTextBoxAction { get; set; }
 
+
+        // Récupération des périphériques audio disponibles
         public List<string> GetAudioDevices()
         {
             List<string> deviceList = new List<string>();
@@ -37,6 +42,7 @@ namespace Transcription.Services
             return deviceList;
         }
 
+        // Démarrage de l'enregistrement audio
         public void StartRecording(int deviceNumber)
         {
             try
@@ -68,6 +74,7 @@ namespace Transcription.Services
             DisposeRecordingResources();
         }
 
+        // Génération d'un chemin de fichier unique pour chaque enregistrement
         private string GenerateUniqueFilePath()
         {
             int fileNumber = 1;
@@ -94,7 +101,7 @@ namespace Transcription.Services
 
         private void OnRecordingStopped(object sender, StoppedEventArgs args)
         {
-            // Attendez un peu pour que les données finissent d'être écrites sur le disque
+            // Délai avant la conversion audio en texte
             Task.Delay(500).ContinueWith(_ =>
             {
                 DisposeRecordingResources();
@@ -102,6 +109,7 @@ namespace Transcription.Services
             });
         }
 
+        // Conversion de l'audio enregistré en texte
         private async void ConvertRecordedAudioToText()
         {
             try
