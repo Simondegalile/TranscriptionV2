@@ -42,3 +42,5 @@ Utilisez Amazon Polly pour convertir du texte en parole naturelle.
 Gérez facilement tous les processus via une interface utilisateur conviviale.
 Contribution
 Les contributions à ce projet sont les bienvenues. Pour contribuer, veuillez forker le dépôt, créer une branche pour vos modifications et soumettre une pull request.
+
+PS: Le Audio.7z est un code python qui na rine a voir avec le reste du projet mais permet de lire des pdf ou des fichier en differentes langue 
